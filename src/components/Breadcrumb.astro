@@ -1,109 +1,70 @@
 ---
-type BreadcrumbItem = {
-  label: string;
-  href: string | null;
+import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
+import { SITE } from "@/config";
+import { buildBreadcrumbItems } from "@/utils/breadcrumbs";
+
+type Props = {
+  withBackButton?: boolean;
 };
 
-const SECTION_LABELS: Record<string, string> = {
-  posts: "Posts",
-  tags: "Tags",
-  galleries: "Galerías",
-  archives: "Archivos",
-  search: "Buscar",
-  about: "About",
-};
+const { withBackButton = false } = Astro.props as Props;
 
-const normalizedPath =
-  Astro.url.pathname.endsWith("/") && Astro.url.pathname !== "/"
-    ? Astro.url.pathname.slice(0, -1)
-    : Astro.url.pathname;
+const breadcrumbs = buildBreadcrumbItems(Astro.url.pathname, {
+  locale: SITE.lang || undefined,
+  compactNumericPagination: true,
+});
 
-const pathSegments = normalizedPath.split("/").filter(Boolean);
-
-const isNumericSegment = (value?: string) =>
-  typeof value === "string" && /^\d+$/.test(value);
-
-const decodeSegment = (value: string) => {
-  try {
-    return decodeURIComponent(value);
-  } catch {
-    return value;
-  }
-};
-
-const formatSegmentLabel = (segment: string) => {
-  const sectionLabel = SECTION_LABELS[segment];
-  if (sectionLabel) return sectionLabel;
-
-  const readable = decodeSegment(segment)
-    .replace(/[-_]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-
-  if (!readable) return segment;
-
-  return readable.charAt(0).toUpperCase() + readable.slice(1);
-};
-
-const buildDefaultBreadcrumbs = (segments: string[]): BreadcrumbItem[] =>
-  segments.map((segment, index) => ({
-    label: formatSegmentLabel(segment),
-    href:
-      index === segments.length - 1
-        ? null
-        : `/${segments.slice(0, index + 1).join("/")}/`,
-  }));
-
-const buildBreadcrumbs = (segments: string[]): BreadcrumbItem[] => {
-  if (segments.length === 0) return [];
-
-  // /posts/2 -> Home > Posts (página 2)
-  if (segments[0] === "posts" && segments.length === 2 && isNumericSegment(segments[1])) {
-    const page = Number(segments[1]);
-    return [{ label: page > 1 ? `Posts (página ${page})` : "Posts", href: null }];
-  }
-
-  // /tags/react/2 -> Home > Tags > React (página 2)
-  if (segments[0] === "tags" && segments[1] && segments.length === 3 && isNumericSegment(segments[2])) {
-    const page = Number(segments[2]);
-    const tagLabel = formatSegmentLabel(segments[1]);
-
-    return [
-      { label: "Tags", href: "/tags/" },
-      {
-        label: page > 1 ? `${tagLabel} (página ${page})` : tagLabel,
-        href: null,
-      },
-    ];
-  }
-
-  return buildDefaultBreadcrumbs(segments);
-};
-
-const breadcrumbs = buildBreadcrumbs(pathSegments);
+const currentPageLabel = breadcrumbs.at(-1)?.label ?? "Inicio";
 ---
 
-<nav class="app-layout mt-6 mb-2" aria-label="breadcrumb">
-  <ol class="breadcrumb-bar font-cartograph text-sm">
-    <li class="breadcrumb-item">
+<nav
+  class:list={["app-layout mt-6 mb-2", { "overflow-hidden": withBackButton }]}
+  aria-label={withBackButton ? "Navegacion contextual" : "breadcrumb"}
+>
+  <ol
+    class:list={[
+      "breadcrumb-bar font-cartograph text-sm",
+      {
+        "has-back inline-flex min-w-0 list-none items-center gap-1.5 rounded-full border border-border/20 bg-muted/5 px-3 py-1.5 backdrop-blur-sm":
+          withBackButton,
+      },
+    ]}
+  >
+    {withBackButton && (
+      <li class="breadcrumb-item is-back">
+        <a
+          id="back-button"
+          href="/"
+          class="back-btn group inline-flex items-center justify-center gap-1 rounded-md px-1.5 py-0.5 text-foreground/60 transition-all duration-200 hover:bg-muted/10 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          aria-label={`Volver a la pagina anterior. Contexto actual: ${currentPageLabel}`}
+        >
+          <IconChevronLeft class="size-3.5 transition-transform duration-200 group-hover:-translate-x-0.5 rtl:rotate-180 rtl:group-hover:translate-x-0.5" />
+          <span aria-hidden="true">cd ..</span>
+          <span class="visually-hidden">Volver</span>
+        </a>
+      </li>
+    )}
+
+    <li class:list={["breadcrumb-item", { "is-root": withBackButton }]}> 
       <a
         href="/"
-        class="breadcrumb-home"
+        class:list={["breadcrumb-home", { "breadcrumb-link-soft": withBackButton }]}
         aria-label="Inicio"
         title="Inicio"
       >
-        ~
+        <span aria-hidden="true">~</span>
+        <span class="visually-hidden">Inicio</span>
       </a>
     </li>
     {
       breadcrumbs.map(item => (
-        <li class="breadcrumb-item">
+        <li class:list={["breadcrumb-item", { "is-current": !item.href }]}>
           {item.href ? (
             <a href={item.href} class="breadcrumb-link">
               {item.label}
             </a>
           ) : (
-            <span class="breadcrumb-current" aria-current="page">
+            <span class="breadcrumb-current" aria-current="page" title={item.label}>
               {item.label}
             </span>
           )}
@@ -137,6 +98,13 @@ const breadcrumbs = buildBreadcrumbs(pathSegments);
     backdrop-filter: blur(10px) saturate(125%);
     scrollbar-width: none;
     animation: breadcrumb-in 0.35s ease-out both;
+  }
+
+  .breadcrumb-bar.has-back {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-backdrop-filter: blur(6px);
+    scrollbar-width: none;
   }
 
   .breadcrumb-bar::-webkit-scrollbar {
@@ -185,6 +153,28 @@ const breadcrumbs = buildBreadcrumbs(pathSegments);
     transform: translateY(-1px);
   }
 
+  .breadcrumb-link-soft {
+    width: auto;
+    height: auto;
+    padding: 0.15rem 0.45rem;
+    border-radius: 0.35rem;
+    color: color-mix(in srgb, var(--foreground) 72%, transparent);
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .breadcrumb-link-soft:hover,
+  .breadcrumb-link-soft:focus-visible {
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    transform: none;
+  }
+
+  .back-btn {
+    flex-shrink: 0;
+  }
+
   .breadcrumb-link,
   .breadcrumb-current {
     padding: 0.35rem 0.55rem;
@@ -213,7 +203,27 @@ const breadcrumbs = buildBreadcrumbs(pathSegments);
     border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
   }
 
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   @media (max-width: 640px) {
+    .breadcrumb-bar.has-back .breadcrumb-item:not(.is-back):not(.is-current) {
+      display: none;
+    }
+
+    .breadcrumb-bar.has-back .breadcrumb-item.is-current .breadcrumb-current {
+      max-width: 38vw;
+    }
+
     .breadcrumb-current {
       max-width: min(24ch, 58vw);
     }
@@ -222,7 +232,9 @@ const breadcrumbs = buildBreadcrumbs(pathSegments);
   @media (prefers-reduced-motion: reduce) {
     .breadcrumb-bar,
     .breadcrumb-home,
-    .breadcrumb-link {
+    .breadcrumb-link,
+    .back-btn,
+    .breadcrumb-link-soft {
       animation: none;
       transition: none;
     }
@@ -239,3 +251,46 @@ const breadcrumbs = buildBreadcrumbs(pathSegments);
     }
   }
 </style>
+
+{
+  withBackButton && (
+    <script>
+      const BACK_BUTTON_SELECTOR = "#back-button";
+      const FALLBACK_BACK_URL = "/";
+
+      function toSafeBackPath(rawBackUrl: string | null) {
+        if (!rawBackUrl) return FALLBACK_BACK_URL;
+
+        try {
+          const parsedUrl = new URL(rawBackUrl, window.location.origin);
+          const isSameOrigin = parsedUrl.origin === window.location.origin;
+          const isHttpProtocol =
+            parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:";
+
+          if (!isSameOrigin || !isHttpProtocol) return FALLBACK_BACK_URL;
+
+          return (
+            `${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}` ||
+            FALLBACK_BACK_URL
+          );
+        } catch {
+          return FALLBACK_BACK_URL;
+        }
+      }
+
+      function updateGoBackUrl() {
+        const backButton = document.querySelector<HTMLAnchorElement>(
+          BACK_BUTTON_SELECTOR
+        );
+
+        if (!backButton) return;
+
+        const rawBackUrl = sessionStorage.getItem("backUrl");
+        backButton.href = toSafeBackPath(rawBackUrl);
+      }
+
+      document.addEventListener("astro:page-load", updateGoBackUrl);
+      updateGoBackUrl();
+    </script>
+  )
+}

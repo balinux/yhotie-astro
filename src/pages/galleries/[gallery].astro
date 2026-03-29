@@ -5,7 +5,7 @@ import { Image } from "astro:assets";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import BackButton from "@/components/BackButton.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
 import Datetime from "@/components/Datetime.astro";
 import IconGallery from "@/assets/icons/IconGallery.svg";
 import { slugifyStr } from "@/utils/slugify";
@@ -67,7 +67,7 @@ const hasCoverInFolder = coverImage
 
 <Layout title={`${title} | Galerías | ${SITE.title}`} description={description}>
   <Header />
-  <BackButton />
+  {SITE.showBackButton && <Breadcrumb withBackButton />}
   <main
     id="main-content"
     class:list={["relative app-layout pb-16", { "mt-8": !SITE.showBackButton }]}
