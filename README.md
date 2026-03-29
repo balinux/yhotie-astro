@@ -14,14 +14,13 @@ Heavily customized version of the [AstroPaper](https://github.com/satnaing/astro
 
 1. [Features](#-features)
 2. [Project structure](#-project-structure)
-3. [Installation & local development](#-installation--local-development)
+3. [Installation and local development](#-installation-and-local-development)
 4. [Commands](#-commands)
 5. [Creating content](#-creating-content)
    - [Posts](#posts-srcdatablog)
    - [Image galleries](#galleries-srcdatagalleries)
 6. [GalleryEmbed component](#%EF%B8%8F-galleryembed-component)
 7. [Configuration](#%EF%B8%8F-configuration)
-8. [Key components](#-key-components)
 9. [Upstream issues resolved](#-upstream-issues-resolved)
 10. [License](#-license)
 
@@ -113,7 +112,7 @@ Heavily customized version of the [AstroPaper](https://github.com/satnaing/astro
 
 ---
 
-## 👨🏻‍💻 Installation & local development
+## 👨🏻‍💻 Installation and local development
 
 **Requirements:** Node.js 20+ and pnpm.
 
