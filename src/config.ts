@@ -1,10 +1,10 @@
 export const SITE = {
-  website: "https://devosfera.vercel.app/",
-  author: "Andrés Ujpán",
-  profile: "https://github.com/0xdres",
+  website: "https://yhotie.com/",
+  author: "Yhotie",
+  profile: "https://github.com/balinux",
   desc: "A space where curiosity becomes code. Exploring web development, software architecture and everything that makes the tech world spin.",
-  title: "Astro Devosfera",
-  ogImage: "devosfera-og.webp", // located in the public folder
+  title: "Yhotie's Blog",
+  ogImage: "yhotie-og.webp", // located in the public folder
   lightAndDarkMode: true,
   postPerIndex: 6,
   postPerPage: 12,
@@ -25,12 +25,12 @@ export const SITE = {
   editPost: {
     enabled: true,
     text: "Edit this post",
-    url: "https://github.com/0xdres/astro-devosfera/edit/main/",
+    url: "https://github.com/balinux/yhotie-astro/edit/main/",
   },
   dynamicOgImage: true,
   dir: "ltr", // "rtl" | "auto"
   lang: "en", // html lang code. Set this empty and default will be "en"
-  timezone: "America/Guatemala", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  timezone: "Asia/Makassar", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   introAudio: {
     enabled: true, // show/hide intro player in home and compact player while navigating
     // src: path to file (relative to /public or absolute URL). Example: "/intro.mp3" or "https://example.com/stream"
