@@ -242,6 +242,40 @@ Bugs and feature requests from the official [AstroPaper](https://github.com/satn
 
 ---
 
+## 🔄 Update Template
+
+Untuk mendapatkan update terbaru dari astro-devosfera:
+
+```bash
+git checkout main
+git fetch upstream
+git merge upstream/main --allow-unrelated-histories
+git push origin main 
+```
+
+
+## 🧠 Safe Update (Recommended)
+
+Gunakan branch update agar lebih aman.
+
+```bash
+git checkout main
+git pull origin main
+
+git checkout -b update-devosfera
+
+git fetch upstream
+git merge upstream/main --allow-unrelated-histories
+
+Jika sudah berhasil:
+
+git checkout main
+git merge update-devosfera
+git push origin main
+```
+
+---
+
 ## 📜 License
 
 Based on [AstroPaper](https://github.com/satnaing/astro-paper) by [Sat Naing](https://satnaing.dev), licensed under MIT.
