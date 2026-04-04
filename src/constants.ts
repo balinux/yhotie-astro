@@ -19,26 +19,26 @@ interface Social {
 export const SOCIALS: Social[] = [
   {
     name: "GitHub",
-    href: "https://github.com/0xdres/",
+    href: "https://github.com/balinux/",
     linkTitle: `${SITE.title} en GitHub`,
     icon: IconGitHub,
   },
   {
     name: "X",
-    href: "https://x.com/avdyen",
+    href: "https://x.com/rio_7",
     linkTitle: `${SITE.title} en X`,
     icon: IconBrandX,
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/avdyan/",
-    linkTitle: `${SITE.title} en LinkedIn`,
+    href: "https://id.linkedin.com/in/rio-juniyantara-putra-b18310120",
+    linkTitle: `${SITE.title} di LinkedIn`,
     icon: IconLinkedin,
   },
   {
     name: "Mail",
-    href: "mailto:andres04u@gmail.com",
-    linkTitle: `Envia un correo a ${SITE.title}`,
+    href: "mailto:ryojuniyantara@gmail.com",
+    linkTitle: `Email ${SITE.title}`,
     icon: IconMail,
   },
 ] as const;
@@ -53,31 +53,31 @@ export const SHARE_LINKS: Social[] = [
   {
     name: "Facebook",
     href: "https://www.facebook.com/sharer.php?u=",
-    linkTitle: `Comparte este post en Facebook`,
+    linkTitle: `Bagikan postingan ini di Facebook`,
     icon: IconFacebook,
   },
   {
     name: "X",
     href: "https://x.com/intent/post?url=",
-    linkTitle: `Comparte este post en X`,
+    linkTitle: `Bagikan postingan ini di X`,
     icon: IconBrandX,
   },
   {
     name: "Telegram",
     href: "https://t.me/share/url?url=",
-    linkTitle: `Comparte este post por Telegram`,
+    linkTitle: `Bagikan postingan ini di Telegram`,
     icon: IconTelegram,
   },
   {
     name: "Pinterest",
     href: "https://pinterest.com/pin/create/button/?url=",
-    linkTitle: `Comparte este post en Pinterest`,
+    linkTitle: `Bagikan postingan ini di Pinterest`,
     icon: IconPinterest,
   },
   {
     name: "Mail",
     href: "mailto:?subject=See%20this%20post&body=",
-    linkTitle: `Envia este post por correo`,
+    linkTitle: `Bagikan postingan ini melalui email`,
     icon: IconMail,
   },
 ] as const;
