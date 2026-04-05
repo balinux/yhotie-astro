@@ -1,12 +1,12 @@
 ---
 title: inkompetensi membunuh lebih banyak daripada kejahatan
-description: Inkompetensi bisa lebih berbahaya dari kejahatan karena merusak sistem secara perlahan, terutama ketika orang yang tidak paham bidangnya diberi wewenang, sehingga dapat membunuh semangat kerja, bisnis, inovasi, dan masa depan banyak orang.
-pubDatetime: 2026-04-05T10:00:00Z
+description: inkompetensi bisa lebih berbahaya dari kejahatan karena merusak sistem secara perlahan
+pubDatetime: 2026-04-04T16:00:00Z
 tags:
-  - article
+  - blog
 draft: false
 ---
-****
+
 Dari judul ini terdengar sedikit ekstrem bukan? Tapi coba kita renungkan kembali sejenak. Kalau ada penjahat atau pencuri yang melakukan aksinya, kerugiannya jelas terukur. Ada pelaku, ada nominal yang hilang, dan ada penegakhukum yang tahu persis siapa yang harus dikejar.
 
 Tapi, Bagaimana dengan sebuah kerusakan yang disebabkan oleh _inkompetensi?_
