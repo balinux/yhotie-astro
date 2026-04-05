@@ -15,7 +15,7 @@ export const SITE = {
   showBackButton: true, // show back button in post detail
   heroTerminalPrompt: {
     prefix: "~", // highlighted part on the left
-    path: "/ready-to-go", // central prompt text
+    path: "/balinux", // central prompt text
     suffix: "$", // terminal symbol on the right
   },
   backdropEffects: {
