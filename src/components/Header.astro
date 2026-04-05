@@ -4,7 +4,7 @@ import IconSearch from "@/assets/icons/IconSearch.svg";
 import IconArchive from "@/assets/icons/IconArchive.svg";
 import IconGallery from "@/assets/icons/IconGallery.svg";
 import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
-import Logo from "@/assets/logo/devosfera.svg";
+import Logo from "@/assets/logo/yhotie.svg";
 import LinkButton from "./LinkButton.astro";
 import MobileMenu from "./MobileMenu.astro";
 import IntroAudioCompact from "./IntroAudioCompact.astro";
@@ -32,7 +32,10 @@ const isActive = (path: string) => {
   Skip to content
 </a>
 
-<header id="main-header" class="sticky top-0 z-40 w-full transition-colors duration-300">
+<header
+  id="main-header"
+  class="sticky top-0 z-40 w-full transition-colors duration-300"
+>
   <div class="header-scrolled-filter w-full">
     <div class="app-layout">
       <div
@@ -47,7 +50,7 @@ const isActive = (path: string) => {
         <!-- Logo -->
         <a
           href="/"
-          class="group relative z-20 flex items-center gap-2 text-xl font-bold tracking-tight sm:text-2xl shrink-0"
+          class="group relative z-20 flex shrink-0 items-center gap-2 text-xl font-bold tracking-tight sm:text-2xl"
         >
           <!-- <span class="nav-logo-text">{SITE.title}</span> -->
           <Logo class="w-37.5 dark:invert" />
@@ -56,7 +59,7 @@ const isActive = (path: string) => {
         <!-- Center Audio Player -->
         {
           SITE.introAudio.enabled && (
-            <div class="flex-1 flex justify-center min-w-0">
+            <div class="flex min-w-0 flex-1 justify-center">
               <IntroAudioCompact
                 src={SITE.introAudio.src}
                 label={SITE.introAudio.label}
@@ -69,7 +72,7 @@ const isActive = (path: string) => {
         }
 
         <!-- Nav area -->
-        <nav id="nav-menu" class="flex items-center sm:gap-1 shrink-0">
+        <nav id="nav-menu" class="flex shrink-0 items-center sm:gap-1">
           <!-- Mobile hamburger (animated lines) -->
           <button
             id="menu-btn"
@@ -195,7 +198,7 @@ const isActive = (path: string) => {
   <!-- Bottom border with gradient -->
   <div
     id="header-border"
-    class="header-border-line opacity-0 transition-opacity duration-300 h-px w-full bg-linear-to-r from-transparent via-border/40 to-transparent"
+    class="header-border-line h-px w-full bg-linear-to-r from-transparent via-border/40 to-transparent opacity-0 transition-opacity duration-300"
   >
   </div>
 </header>
@@ -205,9 +208,13 @@ const isActive = (path: string) => {
   #main-header {
     background: transparent;
   }
-  
+
   :global(.header-scrolled) {
-    background: color-mix(in srgb, var(--background) 80%, transparent) !important;
+    background: color-mix(
+      in srgb,
+      var(--background) 80%,
+      transparent
+    ) !important;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
   }
 
@@ -291,10 +298,14 @@ const isActive = (path: string) => {
     font-weight: 500;
     color: var(--foreground);
     border-radius: 0.5rem;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
   }
 
-  .nav-link:focus-visible, .nav-icon-btn:focus-visible, .nav-search-btn:focus-visible {
+  .nav-link:focus-visible,
+  .nav-icon-btn:focus-visible,
+  .nav-search-btn:focus-visible {
     outline: none;
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 50%, transparent);
   }
@@ -331,7 +342,9 @@ const isActive = (path: string) => {
     width: 2rem;
     height: 2rem;
     border-radius: 0.5rem;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
     color: var(--foreground);
   }
 
@@ -348,7 +361,10 @@ const isActive = (path: string) => {
     border-radius: 0.5rem;
     background: color-mix(in srgb, var(--muted) 40%, transparent);
     cursor: pointer;
-    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease;
   }
 
   .nav-search-btn:hover {
@@ -370,8 +386,10 @@ const isActive = (path: string) => {
     border-bottom-width: 2px;
     background: color-mix(in srgb, var(--background) 90%, transparent);
     color: var(--muted-foreground);
-    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1);
-    transition: color 0.2s ease, border-color 0.2s ease;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
   }
 
   .nav-search-btn:hover .nav-kbd {
@@ -391,7 +409,9 @@ const isActive = (path: string) => {
     border-radius: 0.625rem;
     border: 1px solid transparent;
     background: transparent;
-    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
   }
 
@@ -457,8 +477,6 @@ const isActive = (path: string) => {
     width: 100%;
     transform: rotate(-45deg);
   }
-
-
 </style>
 
 <script>
@@ -506,7 +524,7 @@ const isActive = (path: string) => {
     const backdrop = document.querySelector(".mobile-menu-backdrop");
 
     if (!menuBtn || !mobileMenu) return;
-    
+
     const closeMenu = () => {
       menuBtn.setAttribute("aria-expanded", "false");
       menuBtn.setAttribute("aria-label", "Open Menu");
@@ -530,7 +548,7 @@ const isActive = (path: string) => {
       },
       { signal }
     );
-    
+
     // Close when clicking the backdrop
     if (backdrop) {
       backdrop.addEventListener("click", closeMenu, { signal });
