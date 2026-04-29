@@ -1,7 +1,7 @@
 ---
 title: Cara Install Waydroid di Linux (CachyOS) + Fix Error Network & ADB
 description: ini cuma template konten
-pubDatetime: 2026-04-29T16:00:00Z
+pubDatetime: 2026-04-28T16:00:00Z
 tags:
   - waydroid
   - cachyos
