@@ -1,6 +1,6 @@
 ---
 title: Cara Install Waydroid di Linux (CachyOS) + Fix Error Network & ADB
-description: ini cuma template konten
+description: Waydroid adalah sistem berbasis container yang memungkinkan menjalankan Android langsung di Linux tanpa emulasi.
 pubDatetime: 2026-04-28T16:00:00Z
 tags:
   - waydroid
