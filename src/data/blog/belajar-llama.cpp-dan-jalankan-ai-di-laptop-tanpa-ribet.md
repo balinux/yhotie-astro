@@ -75,7 +75,24 @@ Yang menjalankan model tersebut.
 ./llama-cli -m model.gguf -p "Halo AI"
 ```
 
-👉 AI akan langsung memberikan respon di terminal.
+Jika ingin menjalankan server yang menyediakan endpoint API atau mode server, contoh menjalankan dengan tuning berikut:
+
+```bash
+./llama-server -m ../Llama-3.2-1B-Instruct-Q4_K_S.gguf --ctx-size 1024 -ngl 0
+```
+
+Atau untuk menjalankan CLI (non-server) dengan tuning konteks dan CPU mode:
+
+```bash
+./llama-cli -m ../Llama-3.2-1B-Instruct-Q4_K_S.gguf --ctx-size 1024 -ngl 0
+```
+
+Penjelasan singkat:
+- `-m` → path ke file .gguf (contoh: Llama-3.2-1B-Instruct-Q4_K_S.gguf)
+- `--ctx-size 1024` → ukuran konteks token (lebih besar = konteks lebih panjang)
+- `-ngl 0` → non-GPU / CPU mode (set 0 untuk pakai CPU)
+
+👉 AI akan langsung memberikan respon di terminal (atau berjalan sebagai server bila didukung).
 
 ---
 
