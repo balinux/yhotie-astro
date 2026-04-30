@@ -223,14 +223,53 @@ http://localhost:8080
 Contoh penggunaan:
 
 ```js
-import axios from "axios";
+// server.js - Minimal Express server that forwards to local llama.cpp API
+import express from 'express';
+import axios from 'axios';
 
-const res = await axios.post("http://localhost:8080/v1/chat/completions", {
-  messages: [{ role: "user", content: "Halo AI" }]
+const app = express();
+app.use(express.json());
+
+app.post('/api/chat', async (req, res) => {
+  const prompt = req.body.prompt ?? 'Halo AI';
+  try {
+    const resp = await axios.post('http://localhost:8080/completion', {
+      prompt,
+      n_predict: 128
+    });
+    res.json(resp.data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-console.log(res.data);
+app.listen(3000, () => console.log('Listening on http://localhost:3000'));
 ```
+
+Cara pakai singkat:
+
+1. Install deps
+
+```bash
+npm init -y && npm install express axios
+```
+
+2. Jalankan server
+
+```bash
+node server.js
+```
+
+3. Tes endpoint lokal
+
+```bash
+curl -X POST http://localhost:3000/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"prompt":"Halo AI"}'
+```
+
+Catatan: endpoint internal llama.cpp bisa berbeda (/completion atau /v1/chat/completions). Sesuaikan URL axios jika merasa perlu.
+
 
 👉 Ini artinya:
 
