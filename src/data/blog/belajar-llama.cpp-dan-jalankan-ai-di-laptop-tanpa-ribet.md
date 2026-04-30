@@ -130,6 +130,86 @@ podman run -d \
   --host 0.0.0.0
 ```
 
+🚀 Contoh compose.yaml (llama.cpp API)
+
+```yaml
+version: "3.9"
+
+services:
+  llama-api:
+    image: ghcr.io/ggml-org/llama.cpp:server
+    container_name: llama-api
+    network_mode: host
+    volumes:
+      - ./models:/models:Z
+    command: >
+      -m /models/Llama-3.2-1B-Instruct-Q4_K_S.gguf
+      --ctx-size 1024
+      -ngl 0
+    restart: unless-stopped
+```
+
+🧠 Penjelasan (biar kamu paham, bukan cuma copy)
+
+🔹 network_mode: host
+
+👉 ini penting banget di Podman rootless
+👉 menggantikan -p 8080:8080
+
+🔹 volumes
+- ./models:/models:Z
+
+👉 mount model ke container (SELinux safe)
+
+🔹 command
+
+👉 sama seperti CLI kamu tadi:
+
+-m /models/xxx.gguf --ctx-size 1024 -ngl 0
+🔹 restart
+unless-stopped
+
+👉 auto restart kalau crash / reboot
+
+▶️ Cara menjalankan
+1. Jalankan
+
+podman compose up -d
+
+📌 podman compose adalah wrapper ke tool compose (docs.podman.io)
+
+2. Cek container
+
+podman ps
+3. Cek log
+
+podman logs -f llama-api
+
+🧪 Test API
+
+```bash
+curl http://localhost:8080/completion \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prompt": "Halo AI",
+    "n_predict": 50
+  }'
+```
+
+🔥 Versi Lebih Advanced (Optional)
+
+Kalau mau tuning performa:
+
+```yaml
+command: >
+  -m /models/Llama-3.2-1B-Instruct-Q4_K_S.gguf
+  --ctx-size 1024
+  -b 256
+  -t 4
+  -ngl 0
+```
+
+
 👉 Sekarang AI kamu bisa diakses lewat:
 
 ```
