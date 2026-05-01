@@ -19,12 +19,13 @@ Sekarang? Cukup laptop biasa.
 
 Dengan **llamacpp**, kamu bisa menjalankan AI langsung di perangkat sendiri—offline, cepat, dan tanpa ribet.
 
-![📷 llamacpp](/src/assets/images/llamacpp.png)
+![llamacpp](/src/assets/images/llamacpp.png)
 
 Artikel ini akan membimbing kamu dari nol sampai bisa:
-👉 menjalankan AI di terminal  
-👉 mengubahnya jadi API server  
-👉 menghubungkannya ke aplikasi Node.js atau bahkan ESP32  
+- menjalankan AI di terminal
+- mengubahnya jadi API server
+- menghubungkannya ke aplikasi Node.js atau bahkan ESP32
+
 
 ---
 
@@ -42,7 +43,7 @@ Sederhananya:
 
 ---
 
-# ⚙️ Cara Kerja llamacpp
+# Cara Kerja llamacpp
 
 Agar lebih mudah dipahami, bayangkan alurnya seperti ini:
 
@@ -50,7 +51,7 @@ Agar lebih mudah dipahami, bayangkan alurnya seperti ini:
 Model (.gguf) → llama.cpp → Output AI
 ````
 
-## 🔹 Komponen Utama
+## Komponen Utama
 
 ### 1. Model (.gguf)
 
@@ -69,9 +70,9 @@ Yang menjalankan model tersebut.
 
 ---
 
-# 🚀 Cara Menjalankan llamacpp (Praktik Nyata)
+# Cara Menjalankan llamacpp (Praktik Nyata)
 
-## 🔹 1. Jalankan di Terminal
+## 1. Jalankan di Terminal
 
 ```bash
 ./llama-cli -m model.gguf -p "Halo AI"
@@ -94,11 +95,11 @@ Penjelasan singkat:
 - `--ctx-size 1024` → ukuran konteks token (lebih besar = konteks lebih panjang)
 - `-ngl 0` → non-GPU / CPU mode (set 0 untuk pakai CPU)
 
-👉 AI akan langsung memberikan respon di terminal (atau berjalan sebagai server bila didukung).
+AI akan langsung memberikan respon di terminal (atau berjalan sebagai server bila didukung).
 
 ---
 
-## 🔹 2. Jalankan dengan Podman
+## 2. Jalankan dengan Podman
 
 ```bash
 podman run -it --rm \
@@ -119,9 +120,9 @@ podman run -it --rm \
 
 ---
 
-# 🌐 Ubah llamacpp Jadi API Server
+# Ubah llamacpp Jadi API Server
 
-Ini bagian paling powerful 🔥
+Ini bagian paling powerful
 
 ```bash
 podman run -d \
@@ -132,7 +133,7 @@ podman run -d \
   --host 0.0.0.0
 ```
 
-🚀 Contoh compose.yaml (llama.cpp API)
+Contoh compose.yaml (llama.cpp API)
 
 ```yaml
 version: "3.9"
@@ -151,43 +152,48 @@ services:
     restart: unless-stopped
 ```
 
-🧠 Penjelasan (biar kamu paham, bukan cuma copy)
+Penjelasan (biar kamu paham, bukan cuma copy)
 
-🔹 network_mode: host
+- network_mode: host
 
-👉 ini penting banget di Podman rootless
-👉 menggantikan -p 8080:8080
+ini penting banget di Podman rootless
+menggantikan -p 8080:8080
 
-🔹 volumes
+- volumes
 - ./models:/models:Z
 
-👉 mount model ke container (SELinux safe)
+mount model ke container (SELinux safe)
 
-🔹 command
+- command
 
-👉 sama seperti CLI kamu tadi:
+-  sama seperti CLI kamu tadi:
 
 -m /models/xxx.gguf --ctx-size 1024 -ngl 0
-🔹 restart
+- restart
 unless-stopped
 
-👉 auto restart kalau crash / reboot
+- auto restart kalau crash / reboot
 
 ▶️ Cara menjalankan
 1. Jalankan
 
+```bash
 podman compose up -d
+```
 
-📌 podman compose adalah wrapper ke tool compose (docs.podman.io)
+podman compose adalah wrapper ke tool compose (docs.podman.io)
 
 2. Cek container
-
+```
 podman ps
+```
 3. Cek log
 
+```
 podman logs -f llama-api
+```
 
-🧪 Test API
+Test API
 
 ```bash
 curl http://localhost:8080/completion \
@@ -198,7 +204,7 @@ curl http://localhost:8080/completion \
   }'
 ```
 
-🔥 Versi Lebih Advanced (Optional)
+Versi Lebih Advanced (Optional)
 
 Kalau mau tuning performa:
 
@@ -220,7 +226,7 @@ http://localhost:8080
 
 ---
 
-# 🔗 Integrasi ke Node.js
+# Integrasi ke Node.js
 
 Contoh penggunaan:
 
@@ -273,7 +279,7 @@ curl -X POST http://localhost:3000/api/chat \
 Catatan: endpoint internal llama.cpp bisa berbeda (/completion atau /v1/chat/completions). Sesuaikan URL axios jika merasa perlu.
 
 
-👉 Ini artinya:
+Ini artinya:
 
 - kamu bisa bikin chatbot
     
@@ -284,23 +290,23 @@ Catatan: endpoint internal llama.cpp bisa berbeda (/completion atau /v1/chat/com
 
 ---
 
-# 📡 Contoh Use Case Nyata
+# Contoh Use Case Nyata
 
-## 🔹 1. IoT + ESP32
+## 1. IoT + ESP32
 
 - Kirim data suhu
     
 - AI analisis kondisi
     
 
-## 🔹 2. Chatbot Kampus
+## 2. Chatbot Kampus
 
 - Offline
     
 - Lebih hemat biaya
     
 
-## 🔹 3. AI Lokal untuk Developer
+## 3. AI Lokal untuk Developer
 
 - Testing tanpa API berbayar
     
@@ -335,9 +341,9 @@ Agar performa maksimal, gunakan parameter berikut:
 
 ---
 
-# 🔥 Kelebihan & Kekurangan
+# Kelebihan & Kekurangan
 
-## ✅ Kelebihan
+## Kelebihan
 
 - Gratis & open-source
     
@@ -346,7 +352,7 @@ Agar performa maksimal, gunakan parameter berikut:
 - Tidak butuh GPU
     
 
-## ❌ Kekurangan
+## Kekurangan
 
 - Performa terbatas dibanding cloud
     
@@ -357,31 +363,16 @@ Agar performa maksimal, gunakan parameter berikut:
 
 ---
 
-# 🧠 Insight Penting
+# Insight Penting
 
 Banyak tools populer sebenarnya menggunakan llamacpp di belakang layar.
 
 Artinya:  
-👉 kalau kamu paham llamacpp, kamu paham “mesin inti” AI lokal.
+👉 kalau kamu paham llamacpp, kamu paham “mesin inti” AI lokal.    
 
 ---
 
-# 🔗 Internal Linking Suggestion
-
-Untuk meningkatkan SEO, kamu bisa buat artikel lanjutan:
-
-- Cara install llamacpp di Linux
-    
-- Perbandingan llamacpp vs Ollama
-    
-- Tutorial membuat chatbot dengan Node.js
-    
-- Cara optimasi model GGUF
-    
-
----
-
-# ❓ FAQ (SEO Boost)
+# FAQ 
 
 ## Apa itu llamacpp?
 
@@ -413,7 +404,7 @@ Bisa, misalnya dengan ESP32 untuk analisis data sensor.
 
 ---
 
-# 🚀 Penutup
+# Penutup
 
 Dengan **llamacpp**, AI tidak lagi eksklusif untuk perusahaan besar.
 
