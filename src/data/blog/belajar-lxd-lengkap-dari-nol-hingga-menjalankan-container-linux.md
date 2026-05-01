@@ -14,6 +14,8 @@ Jika kamu biasanya mengandalkan Virtual Machine (VM) yang berat, ini saatnya kam
 
 Kombinasi antara CachyOS yang _ngebut_ dan teknologi _container_ yang super ringan adalah "senjata rahasia" bagi para _developer_ dan mahasiswa IT. Yuk, kita bahas cara _setup_-nya dari nol!
 
+![llamacpp](../../assets/images/lxc.png)
+
 ---
 
 ## Apa Itu LXC dan LXD dan Bagaimana Penerapannya di CachyOS?
