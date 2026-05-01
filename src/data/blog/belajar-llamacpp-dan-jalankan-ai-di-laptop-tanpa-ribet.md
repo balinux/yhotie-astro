@@ -19,7 +19,7 @@ Sekarang? Cukup laptop biasa.
 
 Dengan **llamacpp**, kamu bisa menjalankan AI langsung di perangkat sendiri—offline, cepat, dan tanpa ribet.
 
-![llamacpp](../assets/images/llamacpp.png)
+![llamacpp](../../assets/images/llamacpp.png)
 
 Artikel ini akan membimbing kamu dari nol sampai bisa:
 - menjalankan AI di terminal
