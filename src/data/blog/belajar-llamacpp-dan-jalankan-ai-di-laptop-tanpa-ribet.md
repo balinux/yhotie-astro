@@ -19,7 +19,7 @@ Sekarang? Cukup laptop biasa.
 
 Dengan **llamacpp**, kamu bisa menjalankan AI langsung di perangkat sendiri—offline, cepat, dan tanpa ribet.
 
-![llamacpp](/src/assets/images/llamacpp.png)
+![llamacpp](../assets/images/llamacpp.png)
 
 Artikel ini akan membimbing kamu dari nol sampai bisa:
 - menjalankan AI di terminal
@@ -29,7 +29,7 @@ Artikel ini akan membimbing kamu dari nol sampai bisa:
 
 ---
 
-# 🧠 Apa Itu llamacpp?
+# Apa Itu llamacpp?
 
 **llamacpp** adalah tools open-source berbasis C/C++ untuk menjalankan model AI (LLM) secara lokal.
 
