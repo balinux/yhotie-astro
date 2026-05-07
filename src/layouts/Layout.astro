@@ -1,7 +1,10 @@
 ---
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
-import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
+import {
+  PUBLIC_GA_MEASUREMENT_ID,
+  PUBLIC_GOOGLE_SITE_VERIFICATION,
+} from "astro:env/client";
 import { SITE } from "@/config";
 import SearchModal from "@/components/SearchModal.astro";
 import "@/styles/global.css";
@@ -148,6 +151,42 @@ const showGrain = SITE.backdropEffects.grain;
     }
 
     <ClientRouter />
+
+    {
+      PUBLIC_GA_MEASUREMENT_ID && (
+        <>
+          <script
+            is:inline
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${PUBLIC_GA_MEASUREMENT_ID}`}
+          ></script>
+          <script is:inline define:vars={{ gaId: PUBLIC_GA_MEASUREMENT_ID }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              window.dataLayer.push(arguments);
+            }
+            window.gtag = window.gtag || gtag;
+
+            gtag("js", new Date());
+            gtag("config", gaId, {
+              send_page_view: true,
+            });
+
+            let lastTrackedPath = window.location.pathname + window.location.search;
+            document.addEventListener("astro:page-load", () => {
+              const currentPath = window.location.pathname + window.location.search;
+              if (currentPath === lastTrackedPath) return;
+              lastTrackedPath = currentPath;
+              gtag("event", "page_view", {
+                page_path: currentPath,
+                page_title: document.title,
+                page_location: window.location.href,
+              });
+            });
+          </script>
+        </>
+      )
+    }
 
     <!-- Minimal inline script to prevent FOUC - sets theme immediately -->
     <script is:inline>
